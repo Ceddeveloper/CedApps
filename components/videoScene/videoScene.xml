@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********--> 
+
+<component name="VideoScene" extends="Group" initialFocus = "epgRowList">
+
+     <interface>
+     	 <field id = "videoSceneNavigateBack" type = "Boolean"/>
+       <field id = "content" type = "node" onChange = "onVideoContentChange" alwaysNotify="true"/>
+     </interface>
+
+    <script type="text/brightscript" uri="pkg:/components/VideoScene/videoScene.brs" />
+    <script type="text/brightscript" uri="pkg:/components/Dialog/showDialogBox.brs" />
+    <children>
+
+    <Rectangle
+            id="backgroundRectangle"
+            color="#FFFFFF"
+            width="1920"
+            height="1080"
+            translation="[0, 0]"
+            visible= "true">
+    </Rectangle>
+
+     <Video
+            id="videoPlayer"
+            visible="false"
+            translation="[0, 0]"
+            width="1920"
+            height="1080">
+      </Video>
+
+    </children>
+
+</component>

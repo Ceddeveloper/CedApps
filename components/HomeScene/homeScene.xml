@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********--> 
+
+<component name="HomeScene" extends="Group" initialFocus = "contentRowList">
+
+  <interface>
+    <field id="content" type="node" alias="contentRowList.content" onChange="onContentChange" alwaysNotify="true"/>
+    <field id="navigateBack" type="Boolean"/>
+  </interface>
+
+  <script type="text/brightscript" uri="pkg:/components/HomeScene/homeScene.brs" />    
+  <children>
+
+    <Rectangle
+      id="BackgroundRect"
+      color="#28292D"
+      width="1920"
+      height="1080"
+      translation="[0, 0]"
+      visible= "true">
+    </Rectangle>
+
+    <Rectangle 
+      id="overhang"
+      width="1921"
+      height="165"
+      color="#000000"
+      translation="[0, -10]"
+      visible= "true"/>
+    
+    <Rectangle 
+      id="rowLabelColor"
+      color="#4193F3"
+      width="300"
+      height="70"
+      translation="[10,235]"
+      visible="false"/>
+
+    <RowList 
+      id = "contentRowList" 
+      translation="[ 50, 240 ]" 
+      itemComponentName="RowListItem" 
+      itemSize= "[ 1800, 490 ]"
+      numRows="1"
+      rowItemSize="[ [640, 450] ]"
+      itemSpacing="[ 0, 40]" 
+      rowItemSpacing="[[80, 0]]"
+      rowLabelOffset="[[0,30]]"
+      rowLabelFont="font:LargeBoldSystemFont"
+      showRowLabel="[true]"
+      showRowCounter="[true]"
+      rowLabelColor="#FFFFFF"
+      drawFocusFeedback="true"
+      vertFocusAnimationStyle="fixedFocus" 
+      rowFocusAnimationStyle="floatingFocus" />
+
+    <LoadingIndicator
+      id="loadingIndicator"
+      imageUri="pkg:/components/LoadingIndicator/loader.png"
+      clockwise="true"
+      spinInterval="2"
+      fadeInterval="0.5"
+      spacing="20"
+      imageWidth="100"
+      text="Loading..."
+      width="1920"
+      height="1080"
+      centered="false"
+      translation="[0, 0]"
+      textPadding="10"
+      font="font:SmallBoldSystemFont"
+      backgroundColor="0x551A8B"
+      backgroundOpacity="0"/>
+
+      <Rectangle 
+        id="itemMask" 
+        color="#000000" 
+        opacity="0.0" 
+        width="1920" 
+        height="1080" />
+
+      <VideoScene
+        id="videoplayer"
+        visible="false"/>
+        
+  </children>
+</component>

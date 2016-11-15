@@ -1,0 +1,68 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name="loadChannelCotent" extends="Task" >
+
+  <interface>
+    <field id="content" type="node" />
+    <field id="reqStatus" type="string" value="" />
+    <field id="pageNo" type="string" value="1" />
+  </interface>
+
+  <script type="text/brightscript" uri="pkg:/source/appDataManager.brs"/>
+  <script type="text/brightscript" uri="pkg:/source/appDataParser.brs"/>
+  <script type="text/brightscript" >
+
+    <![CDATA[
+
+    sub init()
+      m.top.functionName = "getcontent"
+    end sub
+
+    sub getcontent()
+      content = createObject("roSGNode", "ContentNode")
+      url = "https://api.vimeo.com/channels/927/videos?format=json&access_token=c9d95cc1f5a743fc07af4269630cdbb0&per_page=25&page="+ m.top.pageNo
+      result = makeServiceCall(url, "json")
+      if result <> invalid then
+        if m.global.contentList <> invalid then
+          contentList = m.global.contentList
+          contentList.data.append(result.data)
+          m.global.contentList = contentList
+          parsedata(contentList)
+        else
+          m.global.contentList = result
+          parsedata(result)
+        end if
+      else
+        m.top.reqStatus = "failed"
+        m.top.content = content
+      end if
+    end sub
+
+    Function parsedata(result)
+      content = createObject("roSGNode", "ContentNode")
+      Categorycontent = content.createChild("ContentNode")
+      Categorycontent.setField("title", "Staff Picks")
+      Categorycontent.setField("NumEpisodes", result.total)
+      for each prog in result.data
+        parsedItem = parseItem(prog)
+        for each picture in prog.pictures
+          if picture.width = 640 then
+            parsedItem.HDPosterUrl = picture.link.toStr()
+            exit for
+          end if
+        end for
+        parsedItem.userInfo = parsedItem.userInfo + prog.user.name.toStr()
+        itemcontent = Categorycontent.createChild("ContentNode")
+        for each key in parsedItem
+            AddAndSetFields(itemcontent, parsedItem)
+        end for
+      end for
+      m.top.content = content
+    End Function
+    ]]>
+
+  </script>
+
+</component>

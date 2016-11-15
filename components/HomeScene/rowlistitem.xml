@@ -1,0 +1,72 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+ 
+<component name = "RowListItem" extends = "Group" >
+ 
+  <interface > 
+    <field id = "itemContent" type = "node" onChange = "showcontent"/>
+    <field id = "focusPercent" type = "float" onChange = "showfocus"/> 
+    <field id = "rowFocusPercent" type = "float" onChange = "showrowfocus"/>        
+  </interface>
+ 
+  <script type = "text/brightscript" uri="pkg:/components/HomeScene/rowlistitem.brs"/>
+
+  <children >
+
+    <Poster 
+      id="itemPoster" 
+      translation="[ 0, 0 ]" 
+      width="640" 
+      height="360"
+      scaleRotateCenter="[ 320.0, 180.0 ]" >
+
+      <Rectangle 
+        id="itemMask" 
+        color="#000000" 
+        opacity="0.75" 
+        width="640" 
+        height="450" />
+
+    </Poster>
+
+    <Rectangle 
+        id="itemMask1" 
+        color="#28292D"
+        translation="[0, 370]"
+        opacity="0.85" 
+        width="640" 
+        height="90" />
+
+    <Label 
+      id="titleLabel" 
+      translation="[10, 370 ]"
+      color="#FFFFFF" 
+      horizAlign="left" 
+      width="640"
+      height="40" 
+      opacity="0.75"/>
+
+    <Label 
+      id="userLabel" 
+      translation="[10, 410 ]"
+      color="#FFFFFF" 
+      horizAlign="left" 
+      width="540"
+      height="40"
+      opacity="0.75"
+      font = "font:SmallestBoldSystemFont"/>
+
+    <Label 
+      id="timeLable" 
+      translation="[540, 410 ]"
+      color="#FFFFFF" 
+      horizAlign="left" 
+      width="100"
+      height="40"
+      opacity="0.75"
+      font = "font:SmallestBoldSystemFont"/>
+
+  </children>
+
+</component>

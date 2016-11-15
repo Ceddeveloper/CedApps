@@ -1,0 +1,43 @@
+<?xml version = "1.0" encoding = "utf-8" ?> 
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name = "SplashScene" extends = "Scene" >
+
+  <interface>
+    <field id="homescreenContent" type="node" alias="HomeScene.content" onChange="OnChangeContent" />
+  </interface>
+
+  <script type = "text/brightscript" uri="pkg:/components/SplashScene/splashscene.brs"/>
+  <script type="text/brightscript" uri="pkg:/components/Dialog/showDialogBox.brs" />
+  <children >
+    <HomeScene
+      id="HomeScene"
+      visible="false"
+      translation="[0,0]" />
+    
+    <Dialog
+        id = "OptionsDialog"
+        visible = "false"/>
+
+    <LoadingIndicator
+        id="loadingIndicator"
+        imageUri="pkg:/components/LoadingIndicator/loader.png"
+        clockwise="true"
+        spinInterval="2"
+        fadeInterval="0.5"
+        spacing="20"
+        imageWidth="100"
+        text="Loading..."
+        width="1920"
+        height="1080"
+        centered="false"
+        translation="[0, 0]"
+        textPadding="10"
+        font="font:SmallBoldSystemFont"
+        backgroundColor="0x551A8B"
+        backgroundOpacity="0"/>
+
+  </children>
+
+</component>
